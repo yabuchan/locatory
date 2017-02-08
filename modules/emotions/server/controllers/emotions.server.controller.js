@@ -42,7 +42,7 @@ exports.list = function(req, res) {
   var preferences = req.params.preferences;
   var soundKeyWords = req.params.soundKeyWords;
 
-  var locationLimitationInRadius = 0.003 // 0.003 in lat/lng is about 1 km.
+  var locationLimitationInRadius = 0.003; // 0.003 in lat/lng is about 1 km.
 
   Emotion.find(
     //limit the entries by location.
@@ -55,8 +55,9 @@ exports.list = function(req, res) {
       });
     } else {
       //Here is business logic what emotions to respond
-      emotions = calcDistanceToEmotionsFrom(lng, lat, emotions);
-      var nearEmotions = getEmotionsWhoseGeoDistanceIsWithIn(radius, emotionsWithDistance);
+      var emotionsWithDistance = calcDistanceToEmotionsFrom(lng, lat, emotions);
+      var nearEmotions = getEmotionsWhoseGeoDistanceIsWithIn(locationLimitationInRadius, emotionsWithDistance);
+      var optimalEmotions = nearEmotions;
       //respond
       res.jsonp(optimalEmotions);
     }
