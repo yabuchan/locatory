@@ -41,9 +41,6 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/sounds/launch/:controlUserId/:youtubeId',
       permissions: ['get']
-    }, {
-      resources: '/api/sounds/stop/:controlUserId/:youtubeId',
-      permissions: ['get']
     }]
   }]);
 };

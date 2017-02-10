@@ -32,7 +32,19 @@ exports.read = function(req, res) {
  * List of Sounds
  */
 exports.list = function(req, res) {
+  var lng = req.params.lng;
+  var lat = req.params.lat;
+  var activity = req.params.activity;
+
   var sounds = [];
+
+  //create search words.
+
+
+  //get list of youtube.
+
+
+  //Add list to response.
   sounds.push({
     id: 'abc11111',
     description: 'Figure skate in Salt Lake Olympic',
@@ -47,19 +59,10 @@ exports.list = function(req, res) {
     year: '1986',
     location: 'Salt Lake'
   });
+
+  //respond list.
   res.jsonp(sounds);
 
-  /*
-  Sound.find().sort('-created').populate('user', 'displayName').exec(function(err, sounds) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(sounds);
-    }
-  });
-  */
 };
 
 /**
@@ -94,7 +97,6 @@ exports.launch = function(req, res) {
 
   //Update the user status
   var statusCode = updateUserSoundStatus(controlUserId, youtubeId);
-
   var sounds = 'ok';
   res.status(statusCode).send({
     message: '-'
@@ -120,37 +122,38 @@ exports.userByID = function(req, res, next, id) {
     } else if (!user) {
       return next(new Error('Failed to load User ' + id));
     }
-
     req.profile = user;
     next();
   });
 };
 
 function updateUserSoundStatus(controlUserId, youtubeId) {
-  return 200;
-  /*
-  User.findOne({
-    _id: id
-  }).exec(function(err, user) {
-    if (err) {
-      return next(err);
-    } else if (!user) {
-      return next(new Error('Failed to load User ' + id));
-    }
-
-    req.profile = user;
-    next();
-  });
-
-
-  sound.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(sound);
-    }
-  });
-  */
+  if (controlUserId) {
+    UserStatus.findOne({ userId: controlUserId }, function(err, userstatus) {
+      if (userstatus) {
+        if (youtubeId) {
+          userstatus.youtubeId = youtubeId;
+        } else {
+          userstatus.youtubeId = 'none';
+        }
+        userstatus.save(function(err) {
+          if (err) {
+            console.error('ERROR!');
+          }
+        });
+      } else {
+        console.log('no userStatus with this user_id is found');
+        userstatus = new UserStatus({ userId: controlUserId, youtubeId: youtubeId });
+        console.log(userstatus);
+        userstatus.save(function(err) {
+          if (err) {
+            console.error('ERROR!');
+          }
+        });
+      }
+    });
+    return 200;
+  } else {
+    return 404;
+  }
 }
