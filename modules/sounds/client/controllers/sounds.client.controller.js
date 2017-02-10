@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Sounds controller
@@ -6,9 +6,9 @@
     .module('sounds')
     .controller('SoundsController', SoundsController);
 
-  SoundsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'soundResolve'];
+  SoundsController.$inject = ['$scope', '$state', '$window', '$interval', 'Authentication', 'soundResolve'];
 
-  function SoundsController ($scope, $state, $window, Authentication, sound) {
+  function SoundsController($scope, $state, $window, $interval, Authentication, sound) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,25 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+
+    vm.code = 'oHg5SJYRHA0';
+    vm.videoUrl = 'https://www.youtube.com/watch?v=18-xvIjH8T4';
+
+    $interval(soundCtl, 3000);
+
+    function soundCtl(){}
+    function checkUserStatus() {
+      return 'https://www.youtube.com/watch?v=t1MWQVKK3N8';
+    }
+
+    function startSound() {}
+
+    function stopSound() {}
+
+    function getYoutubeContent() {
+      return 'soundUrl';
+    }
+
 
     // Remove existing Sound
     function remove() {

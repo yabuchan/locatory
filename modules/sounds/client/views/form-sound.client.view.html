@@ -1,7 +1,8 @@
 <section>
   <div class="page-header">
     <h1>{{vm.sound._id ? 'Edit Sound' : 'New Sound'}}</h1>
-  </div>
+  </div>  
+  <div youtube code="vm.code"></div>
   <div class="col-md-12">
     <form name="vm.form.soundForm" class="form-horizontal" ng-submit="vm.save(vm.form.soundForm.$valid)" novalidate>
       <fieldset>
