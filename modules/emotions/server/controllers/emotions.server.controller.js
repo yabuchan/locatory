@@ -156,3 +156,4 @@ function getEmotionsWhoseGeoDistanceIsWithIn(radius, emotionsWithDistance) {
   });
   return nearEmotions;
 }
+
