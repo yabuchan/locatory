@@ -29,6 +29,9 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/sounds/:soundId',
       permissions: ['get']
+    }, {
+      resources: '/api/sounds-userSoundStatus',
+      permissions: ['get']
     }]
   }, {
     roles: ['guest'],
@@ -40,6 +43,9 @@ exports.invokeRolesPolicies = function() {
       permissions: ['get']
     }, {
       resources: '/api/sounds/launch/:controlUserId/:youtubeId',
+      permissions: ['get']
+    }, {
+      resources: '/api/sounds-userSoundStatus',
       permissions: ['get']
     }]
   }]);

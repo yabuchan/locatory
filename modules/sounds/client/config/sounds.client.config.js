@@ -25,7 +25,7 @@
     // Add the dropdown create item
     menuService.addSubMenuItem('topbar', 'sounds', {
       title: 'Create Sound',
-      state: 'sounds.create',
+      state: 'sounds.play',
       roles: ['user']
     });
   }

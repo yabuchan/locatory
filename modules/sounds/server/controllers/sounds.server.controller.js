@@ -6,7 +6,6 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Sound = mongoose.model('Sound'),
-  User = mongoose.model('User'),
   UserStatus = mongoose.model('UserStatus'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -27,7 +26,6 @@ exports.read = function(req, res) {
 };
 
 
-
 /**
  * List of Sounds
  */
@@ -46,17 +44,24 @@ exports.list = function(req, res) {
 
   //Add list to response.
   sounds.push({
-    id: 'abc11111',
-    description: 'Figure skate in Salt Lake Olympic',
-    detailDescription: 'In 1986, Salt Lake Olympic was held at this place. figure skate here was most memorable. After the dead heat, John Brown won the game.',
-    year: '1986',
+    id: 'qr7kRYO29n4',
+    description: 'New York in 1900s.',
+    detailDescription: 'On the road, both carriages and automotives were running.',
+    year: '1900s',
+    location: 'New York'
+  });
+  sounds.push({
+    id: 'wHW8IrEMQJ0',
+    description: 'New York in 1930s',
+    detailDescription: '',
+    year: '1930s',
     location: 'Salt Lake'
   });
   sounds.push({
-    id: 'abc11112',
-    description: 'Figure skate in Salt Lake Olympic',
-    detailDescription: 'In 1986, Salt Lake Olympic was held at this place. figure skate here was most memorable. After the dead heat, John Brown won the game.',
-    year: '1986',
+    id: 'AQJQRGAo3KY',
+    description: 'New York in 1950s',
+    detailDescription: 'There is a lot of cars.',
+    year: '1950s',
     location: 'Salt Lake'
   });
 
@@ -69,7 +74,6 @@ exports.list = function(req, res) {
  * Sound middleware
  */
 exports.soundByID = function(req, res, next, id) {
-
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Sound is invalid'
@@ -100,30 +104,6 @@ exports.launch = function(req, res) {
   var sounds = 'ok';
   res.status(statusCode).send({
     message: '-'
-  });
-};
-
-
-/**
- * User middleware
- */
-exports.userByID = function(req, res, next, id) {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'User is invalid'
-    });
-  }
-
-  User.findOne({
-    _id: id
-  }).exec(function(err, user) {
-    if (err) {
-      return next(err);
-    } else if (!user) {
-      return next(new Error('Failed to load User ' + id));
-    }
-    req.profile = user;
-    next();
   });
 };
 
