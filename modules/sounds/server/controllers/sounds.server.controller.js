@@ -30,6 +30,8 @@ exports.read = function(req, res) {
  * List of Sounds
  */
 exports.list = function(req, res) {
+  var address = req.params.address;
+  var locality = req.params.locality;
   var lng = req.params.lng;
   var lat = req.params.lat;
   var activity = req.params.activity;
