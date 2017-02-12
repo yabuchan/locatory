@@ -69,8 +69,6 @@ exports.list = function(req, res) {
   });
 */
   sounds = getContents(locality, activity);
-  console.log(req);
-  console.log(activity);
   //respond list.
   res.jsonp(sounds);
 
@@ -165,8 +163,24 @@ function getStartTime(youtubeId) {
 
 function getContents(locality, activity) {
   var sounds = [];
-
-  if (locality === 'London') {
+  if (activity === 'RIDING_BICYCLE') {
+    sounds.push({
+      id: 'jznOT028iK0',
+      url: 'https://s3-us-west-1.amazonaws.com/hackathon-prototype/roadrace1.mp3',
+      description: "Attaque d'Alberto Contador au col du Galibier Tour de France 2007",
+      detailDescription: 'On the road, both carriages and automotives were running.',
+      year: '1900s',
+      location: 'New York'
+    });
+    sounds.push({
+      id: 'mG8de1THZXU',
+      url: 'https://s3-us-west-1.amazonaws.com/hackathon-prototype/roadrace2.mp3',
+      description: "RHC - Red Hook Criterium London No.2 Official Race Video",
+      detailDescription: 'On the road, both carriages and automotives were running.',
+      year: '1900s',
+      location: 'New York'
+    });
+  } else {
     sounds.push({
       url: 'https://s3-us-west-1.amazonaws.com/hackathon-prototype/soccer1.mp3',
       id: '9RHdrwLaUDA',
@@ -190,24 +204,6 @@ function getContents(locality, activity) {
       detailDescription: 'There is a lot of cars.',
       year: '1950s',
       location: 'Salt Lake'
-    });
-  }
-  if (activity === 'RIDING_BICYCLE') {
-    sounds.push({
-      id: 'jznOT028iK0',
-      url: 'https://s3-us-west-1.amazonaws.com/hackathon-prototype/roadrace1.mp3',
-      description: "Attaque d'Alberto Contador au col du Galibier Tour de France 2007",
-      detailDescription: 'On the road, both carriages and automotives were running.',
-      year: '1900s',
-      location: 'New York'
-    });
-    sounds.push({
-      id: 'mG8de1THZXU',
-      url: 'https://s3-us-west-1.amazonaws.com/hackathon-prototype/roadrace2.mp3',
-      description: "RHC - Red Hook Criterium London No.2 Official Race Video",
-      detailDescription: 'On the road, both carriages and automotives were running.',
-      year: '1900s',
-      location: 'New York'
     });
   }
   return sounds;
