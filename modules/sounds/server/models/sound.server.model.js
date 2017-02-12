@@ -19,6 +19,7 @@ mongoose.model('Sound', SoundSchema);
  */
 var UserStatusSchema = new Schema({
   userId: String,
-  youtubeId: String
+  youtubeId: String,
+  startTime: Number
 });
 mongoose.model('UserStatus', UserStatusSchema);
