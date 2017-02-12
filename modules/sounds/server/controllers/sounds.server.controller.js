@@ -45,6 +45,7 @@ exports.list = function(req, res) {
 
 
   //Add list to response.
+  /*
   sounds.push({
     id: 'qr7kRYO29n4',
     description: 'New York in 1900s.',
@@ -66,7 +67,8 @@ exports.list = function(req, res) {
     year: '1950s',
     location: 'Salt Lake'
   });
-
+*/
+  sounds = getContents(locality, activity);
   //respond list.
   res.jsonp(sounds);
 
@@ -161,6 +163,14 @@ function getStartTime(youtubeId) {
 
 function getContents(locality, activity) {
   var sounds = [];
+  sounds.push({
+    id: 'JM-z_0GK_8E',
+    url: 'http://52.9.204.239/modules/users/client/img/mp3/soccer3.mp3',
+    description: 'New York in 1950s',
+    detailDescription: 'There is a lot of cars.',
+    year: '1950s',
+    location: 'Salt Lake'
+  });
   if (locality === 'London') {
     sounds.push({
       url: 'http://52.9.204.239/modules/users/client/img/mp3/soccer1.mp3',
@@ -205,4 +215,5 @@ function getContents(locality, activity) {
       location: 'New York'
     });
   }
+  return sounds;
 }
